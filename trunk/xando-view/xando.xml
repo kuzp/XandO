@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app auth="no" title="XandO">
+    <required rel="css" src="xando.css"/>
+    <required rel="js" src="jquery.js"/>
+    <required rel="js" src="xando.js"/>
+    <required rel="html" src="xando.html"/>
+</web-app>

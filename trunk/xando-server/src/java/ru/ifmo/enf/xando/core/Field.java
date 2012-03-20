@@ -9,7 +9,8 @@ public class Field {
     private final int width;
     private char[][] a;
     private char playersChar = 'x';
-    private char aiChar = 'o';
+    private int gameStatus =  0;   // 0 - in progress , 1 - x won, 2 - o won, 3 - drawn game;
+    //private char aiChar = 'o';
 
     public Field(final int h, final int w) {
         this.height = h;
@@ -26,9 +27,6 @@ public class Field {
         this(3, 3);
     }
 
-    /*
-    * изменяет один элемент и возвращает из мененный Field
-    */
     public void change(final int h, final int w, char value) {
         a[h][w] = value;
     }
@@ -46,22 +44,26 @@ public class Field {
 
     }
 
+    public char getAiChar(){
+        if (playersChar == 'x'){
+            return 'o';
+        }else{
+            return 'x';
+        }
+
+    }
     public char getPlayersChar() {
         return playersChar;
     }
 
     public void setPlayersChar(char ch) {
         this.playersChar = ch;
-//        if (ch == 'x') {
-//            this.playersChar = 'x';
-//            this.aiChar = 'o';
-//        }
-//        if (ch == 'o') {
-//            this.playersChar = 'o';
-//            this.aiChar = 'x';
-//        }
     }
-    public int  gameStatus(){
-        return 0; // 0 - in progress , 1 - x won, 2 - o won, 3 - drawn game;
+    public int  getGameStatus(){
+        return gameStatus; // 0 - in progress , 1 - x won, 2 - o won, 3 - drawn game;
     }
+    public void setGameStatus(int status){
+        this.gameStatus = status;
+    }
+
 }
