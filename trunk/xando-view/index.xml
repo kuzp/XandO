@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app> <!--auth="yes"-->
-    <http url="127.0.0.1" port="8018">
-        <method name="XandoBolet"/>
-    </http>
-    <required rel="js" src="jquery.js"/>
-    <required rel="js" src="index.js"/>
-</web-app>
