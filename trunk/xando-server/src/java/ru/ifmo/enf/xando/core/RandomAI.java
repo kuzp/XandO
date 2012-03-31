@@ -1,66 +1,36 @@
 package ru.ifmo.enf.xando.core;
 
+import java.util.Random;
+
 /**
- * Created by Max Losevskoy
- * Date: 19.03.12
+ * Created by Max Losevskoy (magistrsmi@yandex.ru)
+ * 3:32 30.03.12
  */
+public class RandomAI implements ArtInt {
 
-/*
- * данный класс реализует логику ИИ
- */
-public class LogicInt implements ArtInt {
+    int[][] winComb;   // Победная линия
 
-    int[][] winComb;    // Победная линия
-
-    public int[] doMove(Field field) {
+    public int[] doMove(final Field field) {
         winComb = new int[field.getSize()][2];
         if (!drawCheck(field)) {
-            int[] veryLast = new int[]{-1, -1};
-            int[] last = new int[]{-1, -1};
-            for (int i = 0; i < field.getSize(); i++) {
-                for (int j = 0; j < field.getSize(); j++) {
-                    if (field.getCell(i, j) == 'e') {
-                        switch (check(i, j, field)) {
-                            case 0: {
-                                veryLast[0] = i;
-                                veryLast[1] = j;
-                            }
-                            case 1: {
-                                field.change(i, j, field.getAiChar());
-                                field.setGameStatus(2);
-                                return new int[]{i, j};
-                            }
-                            case 2: {
-                                last[0] = i;
-                                last[1] = j;
-                            }
-                        }
-                    }
+            Random rand = new Random();
+            int i;
+            int j;
+            for (; ; ) {
+                i = rand.nextInt(field.getSize());
+                j = rand.nextInt(field.getSize());
+                if (field.getCell(i, j) == 'e') {
+                    field.change(i, j, field.getAiChar());
+                    break;
                 }
             }
-            if (last[0] != -1) {
-                field.change(last[0], last[1], field.getAiChar());
-                drawCheck(field);
-                return last;
-            } else {
-                field.change(veryLast[0], veryLast[1], field.getAiChar());
-                drawCheck(field);
-                return veryLast;
+            if (win(field)) {
+                field.setGameStatus(2);
             }
+            drawCheck(field);
+            return new int[]{i, j};
         }
         return null;
-    }
-
-    private boolean drawCheck(final Field field) {
-        for (int i = 0; i < field.getSize(); i++) {
-            for (int j = 0; j < field.getSize(); j++) {
-                if (field.getCell(i, j) == 'e') {
-                    return false;
-                }
-            }
-        }
-        field.setGameStatus(3);
-        return true;
     }
 
     public void playersMove(final int h, final int w, final Field field) {
@@ -79,18 +49,16 @@ public class LogicInt implements ArtInt {
         drawCheck(field);
     }
 
-    private int check(final int h, final int w, final Field fld) {
-        final Field chField = fld.fieldCopy(fld);
-        chField.change(h, w, chField.getAiChar());
-        if (win(chField)) {
-            return 1;
-        } else {
-            chField.change(h, w, chField.getPlayersChar());
-            if (win(chField)) {
-                return 2;
+    private boolean drawCheck(final Field field) {
+        for (int i = 0; i < field.getSize(); i++) {
+            for (int j = 0; j < field.getSize(); j++) {
+                if (field.getCell(i, j) == 'e') {
+                    return false;
+                }
             }
         }
-        return 0;
+        field.setGameStatus(3);
+        return true;
     }
 
     private boolean win(final Field f) {
@@ -159,4 +127,3 @@ public class LogicInt implements ArtInt {
         return false;
     }
 }
-

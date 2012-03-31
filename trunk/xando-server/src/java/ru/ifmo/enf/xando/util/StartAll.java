@@ -17,7 +17,7 @@ import java.util.Properties;
 public class StartAll {
     static class Frontend implements Runnable {
         public void run() {
-            final String workDir = "C:\\work\\xando\\trunk\\xando-view";
+            final String workDir = "C:\\work\\xando\\trunk\\xando-view\\"; //"C:\\work\\xando\\trunk\\xando-view";
             final Properties configs = new Properties();
             configs.put(ConfigKeys.PORT, "8028"); // Указываем порт
             configs.put(ConfigKeys.WORK_DIR, workDir); // рабочую директорию
@@ -50,5 +50,6 @@ public class StartAll {
         final Thread threadBackend = new Thread(new Backend(), "tBack");
         threadBackend.start();
         threadFrontend.start();
+        threadFrontend.interrupt();
     }
 }

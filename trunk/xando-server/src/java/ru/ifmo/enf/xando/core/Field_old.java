@@ -2,43 +2,42 @@ package ru.ifmo.enf.xando.core;
 
 /**
  * Authors: Kuznetsov Pavel (palmihal@gmail.com)
- * Losevskoy Max (maxlosevskoy@ya.ru)
+ * Losevskoy Max (maxlosevskoy@ya,ru)
  * Date: 19.03.12
  */
-public class Field {
+public class Field_old {
     private final int size;
     private char[][] a;
     private char playersChar = 'x';
-    private int gameStatus = 0;   // 0 - in progress ,1 for Player win, 2 for CPU win,  3 for draw;
+    private int gameStatus = 0;   // 0 - in progress , 1 for CPU win, 2 for Player win, 3 for draw;
     private char aiChar = 'o';
 
-    public Field(final int s) {
+    public Field_old(final int s) {
         this.size = s;
         a = new char[s][s];
-        for (int i = 0; i < s; i++) {
-            for (int j = 0; j < s; j++) {
+        for (int i = 0; i < s; i++){
+            for (int j = 0; j < s; j++){
                 a[i][j] = 'e';
             }
+
         }
     }
 
-    public Field() {
-        this(5);
+    public Field_old() {
+        this(3);
     }
 
-    public Field fieldCopy(Field original) {
-        Field copy = new Field(original.size);
+    public static Field_old fieldCopy(Field_old original) {
+        Field_old copy = new Field_old(original.size);
         copy.playersChar = original.playersChar;
         copy.aiChar = original.aiChar;
         for (int i = 0; i < original.size; i++) {
-            for (int j = 0; j < original.size; j++) {
-                copy.change(i, j, original.getCell(i, j));
-            }
+            System.arraycopy(original.a[i], 0, copy.a[i], 0, original.size);
         }
         return copy;
     }
 
-    public char[][] fieldToArray(final Field f) {
+    public char[][] fieldToArray(final Field_old f) {
         char[][] res = new char[f.size][f.size];
         System.arraycopy(f.a, 0, res, 0, f.a.length);
         return res;
@@ -88,7 +87,7 @@ public class Field {
         this.gameStatus = status;
     }
 
-    /*public void restart(Field field){
-        field = new Field(this.size,  this.width);
-    }*/
+/*public void restart(Field_old field){
+    field = new Field_old(this.size,  this.width);
+}*/
 }

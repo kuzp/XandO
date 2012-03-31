@@ -5,7 +5,7 @@ package ru.ifmo.enf.xando.core;
  * Date: 25.03.12
  */
 public interface LogicInterface{
-    public void playersMove(final int h, final int w,Field field);
-    public int [] doMove(Field field);
+    public void playersMove(final int h, final int w,Field_old field);
+    public int [] doMove(Field_old field);
     
 }

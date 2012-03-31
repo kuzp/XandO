@@ -8,7 +8,9 @@ import junit.framework.TestCase;
  */
 public class Test extends TestCase{
     public void testBlaBla() throws Exception {
-        int [] f1 = LogicInt.doMove(new Field());
+        int [] f1 = LogicIntSimple.doMove(new Field_old());
         System.out.println(f1.toString());
+        String s = "12";
+
     }
 }
